@@ -1,1 +1,17 @@
 @import '~antd/dist/antd.css';
+
+#components-layout-demo-custom-trigger .trigger {
+  font-size: 30px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #3D64FD;
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}

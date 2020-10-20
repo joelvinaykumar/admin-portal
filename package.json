@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/charts": "^0.9.13",
+    "@antv/g2plot": "^1.1.28",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -10,10 +12,13 @@
     "axios": "^0.20.0",
     "dotenv": "^8.2.0",
     "react": "^16.13.1",
+    "react-charts": "^2.0.0-beta.7",
     "react-dom": "^16.13.1",
+    "react-highlight-words": "^0.16.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "vivid-icons": "^1.0.10"
   },
   "scripts": {
     "start": "react-scripts start",

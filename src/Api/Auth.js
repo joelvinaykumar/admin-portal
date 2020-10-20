@@ -1,17 +1,45 @@
+import React from 'react';
 import axios from 'axios';
+import { message } from 'antd';
+import { API_HOST, ACCESS_KEY_CONSTANT } from '../Utility/constant';
+import {
+  setStorageItem,
+  getStorageItem,
+  deleteStorageItem,
+} from '../Utility/storage';
+import { AuthContext } from '../context/authContext'
 
-// import { API_HOST } from '../Utility/constant';
+const api = axios.create({
+  baseURL: API_HOST,
+});
 
-const API_HOST = 'http://localhost:5000'
+export const Login = async (payload) => {
+  const { authenticated } = React.useContext(AuthContext);
+  try {
+    
+    const res = await api.request({
+      method: 'POST',
+      url: '/auth/signin',
+      data: payload,
+    });
 
-export const LoginApi = async (email, password) => {
-  const res = await axios({
-    method: 'post',
-    url: `${API_HOST}/auth/signin`,
-    data: {
-      email,
-      password
+    if (!getStorageItem(ACCESS_KEY_CONSTANT)) {
+      setStorageItem(ACCESS_KEY_CONSTANT, res.data && res.data.access_token);
+    } else {
+      message.error('Please logout current account and try again');
     }
-  });
-  return res;
-}
+
+    return { success: true };
+  } catch (error) {
+    error.response && message.error(error.response.data.message);
+    return { success: false };
+  }
+};
+
+export const Logout = () => {
+  if (!getStorageItem(ACCESS_KEY_CONSTANT)) {
+    message.error('Invalid operation. No logged in session');
+  } else {
+    deleteStorageItem(ACCESS_KEY_CONSTANT);
+  }
+};

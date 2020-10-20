@@ -1,26 +1,45 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
-import './App.css'
+import React, { useContext } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from './Utility/theme.config';
+import { GlobalStyles } from './Utility/global';
+import { ThemeContext } from './context/themeContext';
+import { AuthContextProvider, AuthContext } from './context/authContext';
+import './App.css';
 
-import { Home, Login } from './Components';
+import { Home } from './Containers';
+import { Login } from './Containers/Login';
+import { MobileView } from './Components';
 
 const App = () => {
+  const [themeContext, authContext] = [
+    useContext(ThemeContext),
+    useContext(AuthContext),
+  ];
+  const { theme } = themeContext;
+  const { authenticated } = authContext;
+  const isMobileOrTablet = window.innerWidth < 768;
+
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route exact path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
+    <AuthContextProvider>
+      {isMobileOrTablet ? (
+        <MobileView />
+      ) : (
+        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+          {authenticated ? (
+            <>
+              <GlobalStyles />
+              <Home />
+            </>
+          ) : (
+            <>
+              <GlobalStyles />
+              <Login />
+            </>
+          )}
+        </ThemeProvider>
+      )}
+    </AuthContextProvider>
   );
-}
+};
 
 export default App;
