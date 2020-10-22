@@ -14,6 +14,7 @@ const globalTheme = {
 
 export const lightTheme = {
   primary: '#FFF',
+  superAdmin: '#6C5CE7',
   secondary: '#F8F8F8',
   textColor: '#585280',
   login: '#3498db',

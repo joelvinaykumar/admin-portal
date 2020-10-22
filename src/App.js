@@ -6,7 +6,7 @@ import { ThemeContext } from './context/themeContext';
 import { AuthContextProvider, AuthContext } from './context/authContext';
 import './App.css';
 
-import { Home } from './Containers';
+import { NewHome } from './Containers';
 import { Login } from './Containers/Login';
 import { MobileView } from './Components';
 
@@ -28,7 +28,7 @@ const App = () => {
           {authenticated ? (
             <>
               <GlobalStyles />
-              <Home />
+              <NewHome />
             </>
           ) : (
             <>
