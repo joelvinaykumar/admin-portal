@@ -1,8 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Login } from '../../Api/Auth';
+
+import { ACCESS_KEY_CONSTANT } from '../../Utility/constant';
+import { auth } from './firebase';
 
 const LoginForm = ({ history }) => {
   const layout = {
@@ -14,9 +15,15 @@ const LoginForm = ({ history }) => {
     wrapperCol: { offset: 8, span: 12 },
   };
 
-  const onFinish = async (values) => {
-    await Login(values);
-    history.push('/');
+  const onFinish = async ({email, password}) => {
+    try {
+      const authHandler = await auth.signInWithEmailAndPassword(email, password);
+      const token = await authHandler.user.getIdToken()
+      localStorage.setItem(ACCESS_KEY_CONSTANT, token);
+      window.location.reload(false);
+    }catch(error) {
+      console.error('Error Signing In: ', error);
+    }
   };
 
   const onFinishFailed = () => message.error('Login failed');

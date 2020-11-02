@@ -1,9 +1,8 @@
-export * from './Calendar';
-export * from './Notifications';
+
 export * from './InfoCard';
-export * from './AttendanceChart';
-export * from './UserList';
 export * from './Mobile';
-export * from './NoticeForm';
-export * from './NoticeBoardItem';
 export * from './NotFound';
+export * from './BackButton';
+export * from './CollegeTable';
+export * from './CourseTable';
+export * from './SubjectTable';

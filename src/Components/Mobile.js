@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Card, Space, Typography } from 'antd';
+import { Card, Typography } from 'antd';
 
 import mobile from '../Assets/Img/mobile.svg'
 
@@ -8,12 +8,12 @@ const { Title } = Typography;
 
 export const MobileView = () => {
 
-  const [width, height] = [window.innerWidth, window.innerHeight];
+  const width = window.innerWidth;
 
 
   return (
     <Container>
-      <img src={mobile} width={width*0.7} />
+      <img src={mobile} width={width*0.7} alt="mobile" />
       <Message level={3}>{'Sorry, we don\'t support admin view in mobile/tablet yet.'}</Message>
     </Container>
   )

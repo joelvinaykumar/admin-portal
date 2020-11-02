@@ -1,6 +1,7 @@
 import React from 'react'
 import { Result, Button } from 'antd';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const NotFound = () => {
   return (
@@ -9,7 +10,7 @@ export const NotFound = () => {
         status="404"
         title="404"
         subTitle="Sorry, the page you visited does not exist."
-        extra={<Button type="primary">Back Home</Button>}
+        extra={<Link to="/"><Button type="primary">Back Home</Button></Link>}
       />
     </Container>
   )
@@ -17,8 +18,9 @@ export const NotFound = () => {
 
 const Container = styled.div`
   width: 100%;
+  height: 100vh;
   background-color: ${({ theme }) => theme.primary};
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
 `;
