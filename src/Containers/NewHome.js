@@ -107,7 +107,7 @@ const RoundedContainer = styled.div`
 `;
 
 const Header = styled.div`
-  height: 250px;
+  height: 150px;
   width: 100%;
   // padding: 0 150px;
   display: flex;

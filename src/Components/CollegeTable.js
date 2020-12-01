@@ -1,9 +1,30 @@
 import React from "react";
-import { Table, Tag, Space } from "antd";
+import { Table, Drawer } from "antd";
+
+const EditCollege = ({closeDrawer, drawerVisible, data}) => {
+  return <Drawer
+    width={640}
+    placement="right"
+    closable
+    onClose={closeDrawer}
+    visible={drawerVisible}
+  >
+    {/* <p>{JSON.stringify(data)}</p> */}
+  </Drawer>
+}
 
 export const CollegeTable = () => {
+  const [drawerStatus, setDrawerStatus] = React.useState(false);
+  const [drawerData, setDrawerData] = React.useState({});
 
-  const ColoredCell = ({ value }) => (<div>{value? '✔️': '❌'}</div>)
+  const ColoredCell = ({ present }) => (<div>{present? '✔️': '❌'}</div>);
+
+  const handleCollegeEdit = (data) => {
+    setDrawerStatus(true);
+    setDrawerData(data);
+  }
+
+  const closeDrawer = () => setDrawerStatus(false);
 
   const dataSource = [
     {
@@ -39,6 +60,9 @@ export const CollegeTable = () => {
       title: "College name",
       dataIndex: "college_name",
       key: "college_name",
+      render: (value, key) => {
+        return <a onClick={handleCollegeEdit(key)}>{value}</a>
+      }
     },
     {
       title: "College Code",
@@ -49,25 +73,25 @@ export const CollegeTable = () => {
       title: "At",
       dataIndex: "attendance",
       key: "attendance",
-      render: value => <ColoredCell value={value} />,
+      render: value => <ColoredCell present={value} />,
     },
     {
       title: "Tt",
       dataIndex: "timetable",
       key: "timetable",
-      render: value => <ColoredCell value={value} />,
+      render: value => <ColoredCell present={value} />,
     },
     {
       title: "Nb",
       dataIndex: "notice_board",
       key: "notice_board",
-      render: value => <ColoredCell value={value} />,
+      render: value => <ColoredCell present={value} />,
     },
     {
       title: "Qr",
       dataIndex: "queries",
       key: "queries",
-      render: value => <ColoredCell value={value} />,
+      render: value => <ColoredCell present={value} />,
     },
     {
       title: "Mr",
@@ -97,6 +121,7 @@ export const CollegeTable = () => {
   return (
     <div>
       <Table dataSource={dataSource} columns={columns} />;
+      <EditCollege closeDrawer={closeDrawer} drawerVisible={drawerStatus} data={drawerData} />
     </div>
   );
 };
