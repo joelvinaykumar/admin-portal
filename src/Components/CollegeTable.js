@@ -1,30 +1,13 @@
 import React from "react";
-import { Table, Drawer } from "antd";
+import { Table, Drawer, Typography } from "antd";
 
-const EditCollege = ({closeDrawer, drawerVisible, data}) => {
-  return <Drawer
-    width={640}
-    placement="right"
-    closable
-    onClose={closeDrawer}
-    visible={drawerVisible}
-  >
-    {/* <p>{JSON.stringify(data)}</p> */}
-  </Drawer>
-}
+const { Title } = Typography;
 
 export const CollegeTable = () => {
   const [drawerStatus, setDrawerStatus] = React.useState(false);
   const [drawerData, setDrawerData] = React.useState({});
 
   const ColoredCell = ({ present }) => (<div>{present? '✔️': '❌'}</div>);
-
-  const handleCollegeEdit = (data) => {
-    setDrawerStatus(true);
-    setDrawerData(data);
-  }
-
-  const closeDrawer = () => setDrawerStatus(false);
 
   const dataSource = [
     {
@@ -61,7 +44,7 @@ export const CollegeTable = () => {
       dataIndex: "college_name",
       key: "college_name",
       render: (value, key) => {
-        return <a onClick={handleCollegeEdit(key)}>{value}</a>
+        return <p>{value}</p>
       }
     },
     {
@@ -120,8 +103,8 @@ export const CollegeTable = () => {
 
   return (
     <div>
+      <Title level={3}>Colleges</Title>
       <Table dataSource={dataSource} columns={columns} />;
-      <EditCollege closeDrawer={closeDrawer} drawerVisible={drawerStatus} data={drawerData} />
     </div>
   );
 };

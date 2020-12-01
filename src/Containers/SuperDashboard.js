@@ -16,7 +16,6 @@ export const SuperDashboard = () => {
     {key: 'St', name: 'Student Count'},
   ]
 
-
   return (
     <Container>
       <BackButton title="Dashboard" />
